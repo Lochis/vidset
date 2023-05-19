@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand text-warning" href="/">Vidset</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" id="Dashboard" href="/dashboard">Dashboard</a>
+        </li>
+      </ul>
+        <div class="d-flex dropdown">
+          {{#if isAuth}}
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://source.boringavatars.com/beam/50">
+          </a>
+          {{/if}}
+          {{#unless isAuth}}
+            <button onclick="window.location.href='/auth/signIn'" class="btn btn-outline-warning">Log in</button>
+            {{/unless}}
+          {{#if isAuth}}
+          <ul class="dropdown-menu">
+            <li><span class="dropdown-item text-info">{{username}}</span></li>
+            <li><a class="dropdown-item" href="/settings">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="/auth/logout">Log Out</a></li>
+            {{/if}}
+          </ul>
+        </div>
+    </div>
+  </div>
+</nav>
