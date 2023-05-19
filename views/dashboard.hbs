@@ -43,12 +43,22 @@
     const formData = new FormData();
     formData.append('video', file);
     console.log(formData);
-    fetch("/dashboard/resize", formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    }
-                })           
-        }
+     fetch('/dashboard/resize', {
+    method: 'POST',
+    body: formData,
+  })
+    .then(response => {
+      // Handle the response from the server
+      if (response.ok) {
+        console.log('Video processing completed');
+      } else {
+        console.error('Video processing failed');
+      }
+    })
+    .catch(error => {
+      console.error('Video processing error:', error);
+    });
+   }
 
     $("input[type=file]").on('change',function(){
     readVideo(this.files[0]);
