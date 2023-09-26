@@ -120,9 +120,9 @@ router.post('/resize', async function(req, res) {
         console.log('Video processing finished');
         // Send a response indicating successful video processing
         res.status(200).json({ 
-          message: 'Video processing completed', 
+          message: 'Video processing completed',
           videoPath: 'images/resized_'+name, 
-          videoWidth: 405, 
+          videoWidth: 405,
           videoHeight: 720});
       })
       .on('error', (err) => {
@@ -169,4 +169,3 @@ router.post('/resize', async function(req, res) {
 
 
 module.exports = router;
- 

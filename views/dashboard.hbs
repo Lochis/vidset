@@ -52,15 +52,15 @@
 
     function readVideo(file, src, width, height) {
         var reader = new FileReader();
-
+      
         reader.onload = function(e, src, width, height) {
-          if (src != ""){
-            videoSrc.src = e.target.result
-          } else {
-            videoSrc.src = src;
-            videoTag.width = width;
-            videoTag.height = height;
-          }
+        if (src != ""){
+          videoSrc.src = e.target.result
+        } else {
+          videoSrc.src = src;
+          videoTag.width = width;
+          videoTag.height = height;
+        }
         
         videoTag.load()
         }.bind(this)
@@ -106,7 +106,7 @@
     $("input[type=file]").on('change',function(){
     readVideo(this.files[0], "");
     processVideo(this.files[0]);
-});
+    });
       
     </script>
 
