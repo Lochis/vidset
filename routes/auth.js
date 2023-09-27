@@ -43,8 +43,19 @@ router.get('/callback',
     passport.authenticate('google', { failureRedirect: '/error' }),
     function(req, res) {
         // Successful authentication, redirect success.
-        res.redirect('/');
+        res.redirect('/profile');
     });
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/');
+}
+
+router.get('/profile', ensureAuthenticated, (req,res) => {
+  res.json('${req.user.displayName}');
+});
 
 router.get('/error', (req, res) => {
     res.send("error logging in")
