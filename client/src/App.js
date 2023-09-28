@@ -1,38 +1,41 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import NavBar from './components/navbar';
 import "./App.css";
 
 function App() {
-  const [message, setMessage] = useState("");
-  const [auth, setAuth] = useState(false);
-  const [username, setUsername] = useState('');
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-  fetch("http://localhost:8000/auth/profile")
-      .then((res) => res.json())
-      .then((data) => {
-        if(data.isAuthenticated) {
-          setAuth(true);
-          setUsername(data.username);
-        } else {
-          setAuth(false);
-          setUsername('');
-        }
-      }).catch((error) => console.log(error));
-
-    fetch("http://localhost:8000/message")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-      }, []);
-
+  useEffect(()=>{
+    const getUser = ()=>{
+      fetch("http://localhost:8000/auth/login/success", {
+        method:"GET", 
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+       .then((response) => {
+        if (response.status === 200) return response.json();
+        throw new Error("authentication has been failed!");
+       })
+       .then((resObject) => {
+        setUser(resObject.user);
+      })
+       .catch((err) => {
+        console.log(err);
+      });
+    };
+    getUser();
+  },[]);
 
   return (
     <div className="App">
-      <NavBar isAuthenticated={auth} username={username}/>
-      <h1>{message}</h1>
+      <NavBar user={user}/>
     </div>
+    
   );
 }
 

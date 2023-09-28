@@ -6,28 +6,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Avatar from './avatar.js';
 import axios from 'axios';
 
-function NavBar() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState('');
-
-  useEffect(() => {
-    // Fetch user data and authentication status
-    fetch("http://localhost:8000/auth/profile")
-      .then((res) => res.json())
-      .then((data) => {
-       // console.log(data);
-        setIsAuthenticated(data.isAuthenticated);
-        setUsername(data.username);
-      })
-      .catch((error) => console.error(error));
-  }, [isAuthenticated]);
+function NavBar({user}) {
+  let [auth, setAuth] = useState(false);
+  let [username, setUsername] = useState('');
 
   const handleSignIn = (e) => {
-    e.preventDefault();
-
-    window.open('http://localhost:8000/auth/SignIn',
-               "_self"
-               );
+    window.open("http://localhost:8000/auth/google", "_self");
   };
 
   return (
@@ -41,14 +25,14 @@ function NavBar() {
           </Nav>
           <Nav>
             <NavDropdown title={<Avatar/>} id="collapsible-nav-dropdown">
-              {isAuthenticated ? (
-               <NavDropdown.Item href="#action/3.1">{username}</NavDropdown.Item>
+              {user ? (
+               <NavDropdown.Item className="text-info" href="#action/3.1">{user.displayName}</NavDropdown.Item>
               ) : (
                 <NavDropdown.Item onClick={handleSignIn}>Log In</NavDropdown.Item>
               )}
               <NavDropdown.Item href="#action/3.2">Settings</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Log Out</NavDropdown.Item>
+              <NavDropdown.Item className="text-danger" href="#action/3.4">Log Out</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
