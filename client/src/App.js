@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/navbar';
+import Home from './views/Home';
+import Dashboard from './views/Dashboard';
 import "./App.css";
 
 function App() {
@@ -19,7 +22,7 @@ function App() {
       })
        .then((response) => {
         if (response.status === 200) return response.json();
-        throw new Error("authentication has been failed!");
+        throw new Error("authentication has failed!");
        })
        .then((resObject) => {
         setUser(resObject.user);
@@ -32,9 +35,13 @@ function App() {
   },[]);
 
   return (
-    <div className="App">
+    <BrowserRouter>
       <NavBar user={user}/>
-    </div>
+      <Routes>
+      <Route index element={<Home />} />
+      <Route path="/dashboard" element={<Dashboard user={user}/>} />
+      </Routes>
+    </BrowserRouter>
     
   );
 }

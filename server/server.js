@@ -22,7 +22,6 @@ app.use(cors({
 
 app.use("/auth", authRoute);
 
-
 app.get('/message', (req, res) => {
   res.json({ message: "Hello from server!"});
 });

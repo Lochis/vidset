@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
+import Container from 'react-bootstrap/Container';
 
-function Home() {
+function Dashboard({user}) {
     const [message, setMessage] = useState("");
     
     useEffect(() => {
@@ -10,10 +11,15 @@ function Home() {
           }, []);
 
     return(
-        <div className="container">
+        <Container>
             <h1>{message}</h1>
-        </div>
+            {user ? (
+                <h1>Authenticated as: {user.displayName}</h1>
+            ) : (
+                <h1>Not Authenticated</h1> 
+            )}
+        </Container>
     );
 }
 
-export default Home;
+export default Dashboard;
