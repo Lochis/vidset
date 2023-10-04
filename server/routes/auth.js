@@ -27,7 +27,7 @@ router.get("/logout", (req, res) => {
     res.redirect(CLIENT_URL);
 });
 
-router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
+router.get("/google", passport.authenticate("google",{ scope : ['profile', 'email', 'https://www.googleapis.com/auth/youtube'] }));
 
 router.get(
     "/callback", 

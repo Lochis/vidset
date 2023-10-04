@@ -1,9 +1,11 @@
 const cookieSession = require("cookie-session");
 const express = require("express");
+const session = require("express-session");
 const cors = require("cors")
-const passportSetup = require("./api/passport")
+const passportSetup = require("./api/passport");
 const passport = require("passport");
 const authRoute = require("./routes/auth")
+const dashboardRoute = require("./routes/dashboard");
 const app = express();
 
 app.use(
@@ -21,6 +23,7 @@ app.use(cors({
 );
 
 app.use("/auth", authRoute);
+app.use("/dashboard", dashboardRoute);
 
 app.get('/message', (req, res) => {
   res.json({ message: "Hello from server!"});

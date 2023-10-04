@@ -6,6 +6,9 @@ require('dotenv').config()
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
+var _accessToken;
+var _profile;
+
 passport.use(
     new GoogleStrategy(
   {
@@ -14,7 +17,11 @@ passport.use(
     callbackURL: "/auth/callback",
   },
   function (accessToken, refreshToken, profile, done) {
-    done(null,profile );
+    console.log("Google strategy callback called");
+    profile.accessToken = accessToken;
+    _accessToken = accessToken;
+    console.log("Profile:", profile);
+    done(null, profile);
   }
  )
 );
