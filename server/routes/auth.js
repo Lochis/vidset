@@ -36,5 +36,4 @@ router.get(
     failureRedirect: "/login/failed",
   })
 );
-
   module.exports = router;

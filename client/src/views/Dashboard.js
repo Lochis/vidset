@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import pic from '../pictures/pic.jpg';
 
 
 function Dashboard({user}) {
@@ -26,7 +27,7 @@ function Dashboard({user}) {
           .then((data) => setMessage(data.message));
           }, []);
 
-    const numbers = [1, 2, 3];
+const numbers = [1, 2, 3];
 const displayCards = (nums) =>{
     return nums.map(num =>
         <Card style={{ width: '18rem', height: '18rem'}}>
