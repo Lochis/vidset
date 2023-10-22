@@ -2,6 +2,40 @@
   text-align: center;
 }
 
+.flex-container {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 3rem; /* Adjust the gap between cells as needed */
+}
+
+@media (min-width: 1000px) {
+  .flex-cell {
+    /*flex: 1; /* Allow cells to grow and shrink equally to fill available space */
+    align-self: start;
+    width: calc(25% - 3rem);
+    /*padding: 10px; /* Example padding */
+    /* text-align: center; /* Center the content within each cell */
+  }
+}
+@media (max-width: 999px) {
+ .flex-cell{
+   flex: 1;
+   width: calc(33% - 3rem);
+   padding: 10px;
+ }
+}
+
+@media (max-width: 800px) {
+ .flex-cell{
+   flex: 1;
+   width: calc(45% - 3rem);
+   padding: 10px;
+ }
+}
+
+
 body {
   background-color: #2B3035;
   color: #EEF0F2;

@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from "react";
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import pic from '../pictures/pic.jpg';
+import pic from '../pictures/picWebm.gif';
+import '../App.css';
 
 
 function Dashboard({user}) {
@@ -22,39 +25,47 @@ function Dashboard({user}) {
           "Content-Type": "application/json",
           "Access-Control-Allow-Credentials": true,
         },
+
       })
           .then((res) => res.json())
           .then((data) => setMessage(data.message));
           }, []);
 
-const numbers = [1, 2, 3];
-const displayCards = (nums) =>{
-    return nums.map(num =>
-        <Card style={{ width: '18rem', height: '18rem'}}>
-                  <Card.Img variant="top" src="holder.js/100px180" />
-                  <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
-                    <Card.Text>
-                      {num}
-                      Some quick example text to build on the card title and make up the
-                      bulk of the card's content.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
-                  </Card.Body>
-                </Card>
-    );
-}
 
+const numbers = [1, 2, 3, 4, 5, 6];
+
+const displayCards = (cells) =>{
+  console.log(cells);
+  const cardWidth = '14vw';
+  const aspectRatio = 9/16;
+  return (
+        <div className="flex-container">
+         {cells.map((cell, index)=>(
+           <div className="flex-cell">
+           <Card className="mx-2 bg-dark text-white p-0" key={`cell-${index}`} style={{ minWidth: '200px', minHeight: '355.56px', width: cardWidth ,height: `calc(${cardWidth} * ${1 / aspectRatio})` }}>
+               <Card.Img variant="top" src={pic} style={{objectFit: 'cover', width: '100%', height: '100%', margin: 0, padding: 0}} />
+               <Card.ImgOverlay>
+                 <Card.Body className="p-0">
+                   <Card.Title>9/16 Preview</Card.Title>
+                   <Card.Text>
+                     Cell-{index}
+                   </Card.Text>
+                 </Card.Body>
+               </Card.ImgOverlay>
+             </Card>
+           </div>
+         ))}
+         </div>
+        );
+};
 
     return(
-        <Container>
+        <Container fluid="md">
             {user ? (
                 <div>
-                  <h3>Authenticated as: {user.displayName}</h3>
-                  <ul>
+                  <h5>Authenticated as: {user.displayName}</h5>
                     {displayCards(numbers)}
-                  </ul>
-                </div>
+                  </div>
             ) : (
                 <h1>Not Authenticated</h1> 
             )}
