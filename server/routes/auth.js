@@ -1,12 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const mysql = require('../api/mysql');
 
 const CLIENT_URL = "http://localhost:3000/"
 
-router.get("/login/success", (req,res) => {
+router.get("/login/success", async (req,res) => {
      if(req.user) {
-    res.status(200).json({
+
+        // Put user to database if not already in.
+        const insertQuery = "INSERT INTO users (id, name) VALUES (?, ?)";
+        const values = [req.user.id, req.user.displayName];
+        const result = await mysql({query: insertQuery, values});
+        console.log("Result", result);
+
+        res.status(200).json({
         success:true,
         message: "successful",
         user: req.user,
