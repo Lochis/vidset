@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import {NextUIProvider} from "@nextui-org/react";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from './components/navbar';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import Navigation from './components/navigation';
 import Home from './views/Home';
 import Dashboard from './views/Dashboard';
+import Schedule from './views/Schedule';
 import "./App.css";
 
 function App() {
@@ -35,13 +37,16 @@ function App() {
   },[]);
 
   return (
+    <NextUIProvider>
     <BrowserRouter>
-      <NavBar user={user}/>
+      <Navigation user={user}/>
       <Routes>
       <Route index element={<Home />} />
       <Route path="/dashboard" element={<Dashboard user={user}/>} />
+        <Route path="/schedule" element={<Schedule user={user}/>}/>
       </Routes>
     </BrowserRouter>
+    </NextUIProvider>
     
   );
 }

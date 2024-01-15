@@ -5,6 +5,7 @@ const cors = require("cors")
 const passportSetup = require("./api/passport");
 const passport = require("passport");
 const authRoute = require("./routes/auth")
+const scheduleRoute = require("./routes/schedule");
 const dashboardRoute = require("./routes/dashboard");
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(cors({
 );
 
 app.use("/auth", authRoute);
+app.use("/schedule", scheduleRoute);
 app.use("/dashboard", dashboardRoute);
 
 app.get('/message', (req, res) => {

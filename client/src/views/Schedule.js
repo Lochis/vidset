@@ -2,14 +2,14 @@ import React, {useState, useEffect} from "react";
 /*import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';*/
+import Card from 'react-bootstrap/Card';*/
+import Button from 'react-bootstrap/Button';
 import pic from '../pictures/picWebm.gif';
 import newVid from '../pictures/new-vid.png';
 import '../App.css';
 
 
-function Dashboard({user}) {
+function Schedule({user}) {
 
    const renderListOfUserNames = (names) => {
     return names.map(name => <li>{name}</li>)
@@ -18,7 +18,7 @@ function Dashboard({user}) {
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost:8000/dashboard", {
+        fetch("http://localhost:8000/schedule", {
         method:"GET",
         credentials: "include",
         headers: {
@@ -77,10 +77,10 @@ const displayCards = (cells) =>{
                   </div>
                   </div>
             ) : (
-                <h1>Not Authenticated</h1> 
+                <h1>Not Authenticated</h1>
             )}
         </Container>
     );
 }
 
-export default Dashboard;
+export default Schedule;

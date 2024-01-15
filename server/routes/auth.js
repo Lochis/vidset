@@ -9,7 +9,7 @@ router.get("/login/success", async (req,res) => {
      if(req.user) {
 
         // Put user to database if not already in.
-        const insertQuery = "INSERT INTO users (id, name) VALUES (?, ?)";
+        const insertQuery = "INSERT IGNORE INTO users (id, name) VALUES (?, ?)";
         const values = [req.user.id, req.user.displayName];
         const result = await mysql({query: insertQuery, values});
         console.log("Result", result);
