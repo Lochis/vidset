@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';*/
+import {Tabs, Tab, Card, CardHeader, CardBody, CardFooter, Divider, Image} from "@nextui-org/react";
 import pic from '../pictures/picWebm.gif';
 import newVid from '../pictures/new-vid.png';
 import '../App.css';
@@ -43,43 +44,69 @@ const displayCards = (cells) =>{
          cells.map((cell, index)=>(
            <div className="flex-cell">
            <Card className="mx-2 bg-dark text-white p-0" key={`cell-${index}`} style={{ minWidth: '200px', minHeight: '355.56px', width: cardWidth ,height: `calc(${cardWidth} * ${1 / aspectRatio})` }}>
-               <Card.Img variant="top" src={pic} style={{objectFit: 'cover', width: '100%', height: '100%', margin: 0, padding: 0}} />
-               <Card.ImgOverlay>
-                 <Card.Body className="p-0">
-                   <Card.Title>9/16 Preview</Card.Title>
-                   <Card.Text>
-                     Cell-{index}
-                   </Card.Text>
-                 </Card.Body>
-               </Card.ImgOverlay>
+             <Image
+        alt="Woman listing to music"
+        className="object-cover w-full h-full z-0"
+        src={pic}
+      />
              </Card>
            </div>
          ))
         );
 };
 
+  let tabs = [
+    {
+    id: "youtube",
+    label: "Youtube",
+    content: {
+      views: "100",
+      subscribers: "22",
+      watch_hours: "83",
+        },
+    },
+    {
+    id: "snapchat",
+    label: "Snapchat",
+    content: {
+      views: "200",
+      subscribers: "92",
+      watch_hours: "32",
+        },
+    },
+  ]
+
     return(
-        <Container fluid="md">
+        <div className="container mx-auto justify-between px-3 py-3">
             {user ? (
-                <div>
-                  <h5>Authenticated as: {user.displayName}</h5>
-                  <div className="flex-container">
-                    <div className="flex-cell">
-                      <Card className="mx-2 bg-dark text-white p-0" key={`cell-add`} style={{ minWidth: '200px', minHeight: '355.56px', width: cardWidth ,height: `calc(${cardWidth} * ${1 / aspectRatio})` }}>
-                        <Card.Img variant="top" src={newVid} style={{objectFit: 'cover', width: '100%', height: '100%', margin: 0, padding: 0}} />
-                        <Card.ImgOverlay>
-
-                        </Card.ImgOverlay>
-                      </Card>
-                    </div>
-
-                    {displayCards(numbers)}
+              <Tabs aria-label="Social Media Tabs" items={tabs}>
+              {(item) => (
+                <Tab key={item.id} title={item.label}>
+                  <div className="flex w-full flex-row space-x-6">
+                    <Card className="w-full h-40">
+                      <CardBody>
+                        <p class="mb-6 text-lg font-bold lg:text-2xl">
+                        Views
+                        </p>
+                        {item.content.views}
+                      </CardBody>
+                    </Card>
+                    <Card className="w-full h-40">
+                      <CardBody>
+                        <p class="mb-6 text-lg font-bold lg:text-2xl">
+                        Subscribers
+                        </p>
+                        {item.content.subscribers}
+                </CardBody>
+                    </Card>
                   </div>
-                  </div>
+                </Tab>
+              )}
+              </Tabs>
             ) : (
-                <h1>Not Authenticated</h1> 
+                <h1>Not Authenticated</h1>
             )}
-        </Container>
+        </div>
     );
 }
 

@@ -43,15 +43,11 @@ const displayCards = (cells) =>{
          cells.map((cell, index)=>(
            <div className="flex-cell">
            <Card className="mx-2 bg-dark text-white p-0" key={`cell-${index}`} style={{ minWidth: '200px', minHeight: '355.56px', width: cardWidth ,height: `calc(${cardWidth} * ${1 / aspectRatio})` }}>
-               <Card.Img variant="top" src={pic} style={{objectFit: 'cover', width: '100%', height: '100%', margin: 0, padding: 0}} />
-               <Card.ImgOverlay>
-                 <Card.Body className="p-0">
-                   <Card.Title>9/16 Preview</Card.Title>
-                   <Card.Text>
-                     Cell-{index}
-                   </Card.Text>
-                 </Card.Body>
-               </Card.ImgOverlay>
+             <Image
+        alt="Woman listing to music"
+        className="object-cover w-full h-full z-0"
+        src={pic}
+      />
              </Card>
            </div>
          ))
@@ -59,17 +55,13 @@ const displayCards = (cells) =>{
 };
 
     return(
-        <Container fluid="md">
+        <div className="lg:container mx-auto flex w-full flex-wrap items-center justify-between px-3 py-3">
             {user ? (
                 <div>
-                  <h5>Authenticated as: {user.displayName}</h5>
                   <div className="flex-container">
                     <div className="flex-cell">
                       <Card className="mx-2 bg-dark text-white p-0" key={`cell-add`} style={{ minWidth: '200px', minHeight: '355.56px', width: cardWidth ,height: `calc(${cardWidth} * ${1 / aspectRatio})` }}>
-                        <Card.Img variant="top" src={newVid} style={{objectFit: 'cover', width: '100%', height: '100%', margin: 0, padding: 0}} />
-                        <Card.ImgOverlay>
 
-                        </Card.ImgOverlay>
                       </Card>
                     </div>
 
@@ -79,8 +71,7 @@ const displayCards = (cells) =>{
             ) : (
                 <h1>Not Authenticated</h1>
             )}
-        </Container>
+        </div>
     );
 }
-
 export default Schedule;

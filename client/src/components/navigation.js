@@ -22,24 +22,10 @@ function Navigation({user}) {
   return (
  <Navbar>
       <NavbarBrand>
-        <p className="font-bold text-inherit">VIDSET</p>
+        <p className="font-bold text-purple-500 text-xl" ><Link to="/">VIDSET</Link></p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
+
       </NavbarContent>
           {user ? (
       <NavbarContent as="div" justify="end">
@@ -52,7 +38,7 @@ function Navigation({user}) {
               className="transition-transform"
               color="secondary"
               name={user.displayName}
-              size="md"
+              size="lg"
              src={user._json.picture}
             />
              ) : (
@@ -62,7 +48,7 @@ function Navigation({user}) {
               className="transition-transform"
               color="secondary"
               name={user.displayName}
-              size="md"
+              size="lg"
               src="https://source.boringavatars.com/beam/50"
                />
              )}
@@ -70,15 +56,12 @@ function Navigation({user}) {
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-            <p className="font-semibold">{user.displayName}</p>
+            <p className="font-semibold text-green-500">{user.displayName}</p>
             </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-            <DropdownItem key="logout" color="danger" onClick={handleLogOut}>
+            <DropdownItem className="text-purple-400" key="settings"><Link to="/settings">Settings</Link></DropdownItem>
+            <DropdownItem className="text-purple-400" key="dashboard"><Link to="/dashboard">Dashboard</Link></DropdownItem>
+            <DropdownItem className="text-purple-400" key="schedule">Schedule</DropdownItem>
+            <DropdownItem key="logout" className="text-red-500" onClick={handleLogOut}>
               Log Out
             </DropdownItem>
           </DropdownMenu>

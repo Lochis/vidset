@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 .App {
   text-align: center;
 }
@@ -36,7 +41,7 @@
 }
 
 
-body {
+/*body {
   background-color: #2B3035;
   color: #EEF0F2;
 }
@@ -82,4 +87,4 @@ hr {
   to {
     transform: rotate(360deg);
   }
-}
+}*/
