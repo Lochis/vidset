@@ -4,7 +4,7 @@
 
 ## Frameworks and Packages
  - [React](https://react.dev/)
- - [React-Bootstrap](https://react-bootstrap.netlify.app/)
+ - [NextUI](https://nextui.org/)
  - [Node.js](https://nodejs.org/en) with Express
  - [Passport.js](https://www.passportjs.org/)
  - ...
