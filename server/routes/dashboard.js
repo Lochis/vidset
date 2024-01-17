@@ -26,34 +26,36 @@ router.get('/', function(req, res, next) {
 function initYoutubeClient(accessToken){
   youtubeClient = google.youtube({
     version: 'v3',
-    auth: accessToken,
+     headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    //auth: process.env.VIDSET_API_KEY,
   });
 
-  //ytAnalytics = google.youtubeAnalytics({
- //   version: 'v1',
- //   auth: accessToken,
- // });
+  /*ytAnalytics = google.youtubeAnalytics({
+    version: 'v1',
+    auth: accessToken,
+  });*/
 
    getUserChannel();
 }
 
-async function getUserChannel(){
-     const response = await youtubeClient.channels.list({
+function getUserChannel(){
+     const request = youtubeClient.channels.list({
       mine: true,
       part: 'id,contentDetails',
+    },(err, response) => {
+
     });
       // if ('error' in response) {
        //  console.error(response.error.message)
       // }  else {
 
-
-     console.log(response);
-
-         //channelId = response.items[0].id
-        // var uploadsListId = response.items[0].contentDetails.relatedPlaylists.uploads;
-        // getPlaylistItems(uploadsListId);
-   }
-/*request.execute(function(response){
+       //  channelId = response.items[0].id
+      //   var uploadsListId = response.items[0].contentDetails.relatedPlaylists.uploads;
+       //  getPlaylistItems(uploadsListId);
+  // }
+request.execute(function(response){
     if ('error' in response){
       //display a toast eventually, but for now, just output to console
       console.error(response.error.message);
@@ -63,8 +65,8 @@ async function getUserChannel(){
       var uploadsListId = response.items[0].contentDetails.relatedPlaylists.uploads;
       getPlaylistItems(uploadsListId);
     }
-    }}
-}*/
+});
+}
 
 function getPlaylistItems(listId) {
   // See https://developers.google.com/youtube/v3/docs/playlistitems/list
